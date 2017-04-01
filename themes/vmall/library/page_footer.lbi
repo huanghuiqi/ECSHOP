@@ -1,0 +1,51 @@
+<div class="lg_layout">
+		<ul class="service">
+			<li><i class="s1 bg sw"></i>500强企业 品质保证</li>
+			<li><i class="s2 bg sw"></i>7天退货 15天换货</li>
+			<li><i class="s3 bg sw"></i>100元起免运费</li>
+			<li><i class="s4 bg sw"></i>448家维修网点 全国联保</li>
+		</ul>
+	</div>
+		{*底部 帮助中心*}
+	<div class="lg_layout">
+		<!--{if $helps}-->
+		<!-- {foreach from=$helps item=help_cat} -->
+		<div class="policy">
+			<span><i class="h1 bg hw"></i>{$help_cat.cat_name}</span>
+			<!-- {foreach from=$help_cat.article item=item} -->
+			<li><a href="{$item.url}">{$item.short_title}</a></li>
+			<!--{/foreach}-->
+		</div>
+		<!--{/foreach}-->
+		<!--{/if}-->
+		<div class="clear"></div>
+	</div>
+
+
+	<div class="lg_layout">
+        {*友情链接 index.dwt*}
+		<div class="friend_link">
+			<!-- {if $txt_links} -->
+			<p>友情链接：
+				<!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+			 |<a href="{$link.url}" target="_blank" style="line-height:1.5;">{$link.name}</a>
+			 {*<span style="line-height:1.5;"> | </span>*}
+				<!--结束文字类型的友情链接{/foreach}-->
+			 </p>
+			<!--{/if}-->
+		</div>
+		{*版权部分 page.footer.lbi*}
+		<div class="copyright">
+			<p>
+				Copyright © 2011-2015 华为软件技术有限公司 版权所有 保留一切权利 苏B2-20130048号 | 苏ICP备09062682号-9
+				网络文化经营许可证苏网文[2012]0401-019号
+				网络文化经营许可证苏网文[2012]0401-019号
+                {$copyright}
+			</p>
+			<p>
+				<img src="./images/certificate_01.png" />
+				<img src="./images/certificate_02.png" />
+				<img src="./images/certificate_03.png" />
+			</p>
+		</div>
+    </div>

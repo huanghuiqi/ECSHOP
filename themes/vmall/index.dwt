@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js,jquery.min.js,json2.js,vmall_index.js,vmall_common.js'}
+</head>
+<body>
+    <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+	<div class="lg_layout">
+		<div class="slider">
+			<div class="img_block" id="img_block">
+				<img src="./images/1.jpg" width=980 height=400 />
+				<img src="./images/2.jpg" class="hide" width=980 height=400 />
+				<img src="./images/3.jpg" class="hide" width=980 height=400 />
+				<img src="./images/4.jpg" class="hide" width=980 height=400 />
+				<img src="./images/5.jpg" class="hide" width=980 height=400 />
+
+				<div class="small_icon" id="small_icon">
+					<li><a href="javascript:void(0)" onclick="toggle(0)">1</a></li>
+					<li><a href="javascript:void(0)" onclick="toggle(1)">2</a></li>
+					<li><a href="javascript:void(0)" onclick="toggle(2)">3</a></li>
+					<li><a href="javascript:void(0)" onclick="toggle(3)">4</a></li>
+					<li><a href="javascript:void(0)" onclick="toggle(4)">5</a></li>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="lg_layout">
+		<h2 class="best_bar">精品推荐</h2>
+		<div id="best_bar_wrap">
+			<ul class="best_item">
+			     <!--{foreach from=$best_goods item=goods}-->
+				<li>
+					<img src="{$goods.thumb}" />
+					<div class="title">
+						<a href="{$goods.url}">{$goods.short_style_name}</a>
+					</div>
+					<div class="price">{$goods.shop_price}</div>
+				</li>
+				  <!--{/foreach}-->
+				<div class="clear"></div>
+			</ul>
+
+
+
+		<h2 class="new_bar">新品上市</h2>
+		<div id="new_bar_wrap">
+			<div class="tag">
+			    {foreach from=$cat_rec[2] item=rec_data}
+				<li><a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, 0);">{$rec_data.cat_name}</a></li>
+				{/foreach}
+			</div>
+			<div class="clear"></div>
+		<ul class="new_item">
+		    <!--{foreach from=$new_goods item=goods}-->
+			<li>
+				<img src="{$goods.thumb}" />
+				<div class="title">
+					<a href="{$goods.url}">{$goods.short_style_name}</a>
+				</div>
+				<div class="price">{$goods.shop_price}</div>
+			</li>
+			{/foreach}
+			<div class="clear"></div>
+		</ul>
+
+	</div>
+
+	<h2 class="hot_bar">热卖商品</h2>
+	<div id="hot_bar_wrap">
+		<div class="tag">
+			<li><a href="javascript:void(0)">GSM手机</a></li>
+			<li><a href="javascript:void(0)">双模手机</a></li>
+			<li><a href="javascript:void(0)">充值卡</a></li>
+		</div>
+		<div class="clear"></div>
+
+		<ul class="hot_item">
+		    <!--{foreach from=$hot_goods item=goods}-->
+			<li>
+				<img src="{$goods.thumb}" />
+				<div class="title">
+					<a href="{$goods.url}">{$goods.short_style_name}</a>
+				</div>
+				<div class="price">{$goods.shop_price}</div>
+			</li>
+			 <!--{/foreach}-->
+			<div class="clear"></div>
+		</ul>
+	</div>
+</div>
+		{*引入page.foot.lbi文件*}
+	<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>
