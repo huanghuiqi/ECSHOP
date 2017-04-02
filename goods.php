@@ -190,7 +190,8 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
         $smarty->assign('goods',              $goods);
         $smarty->assign('goods_id',           $goods['goods_id']);
         $smarty->assign('promote_end_time',   $goods['gmt_end_time']);
-        $smarty->assign('categories',         get_categories_tree($goods['cat_id']));  // 分类树
+//        $smarty->assign('categories',         get_categories_tree($goods['cat_id']));  // 分类树
+        $smarty->assign('categories',         get_categories_tree(0));  // 分类树
 
         /* meta */
         $smarty->assign('keywords',           htmlspecialchars($goods['keywords']));
@@ -276,7 +277,8 @@ else
 
 /* 更新点击次数 */
 $db->query('UPDATE ' . $ecs->table('goods') . " SET click_count = click_count + 1 WHERE goods_id = '$_REQUEST[id]'");
-
+$topGoods = get_Top10();
+$smarty->assign('top_goods',  array_slice($topGoods,0,6));    //销售排行  默认10个  想要6个就切割
 $smarty->assign('now_time',  gmtime());           // 当前系统时间
 $smarty->display('goods.dwt',      $cache_id);
 

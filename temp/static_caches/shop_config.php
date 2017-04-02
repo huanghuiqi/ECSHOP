@@ -91,7 +91,7 @@ scrollAmount=3><U><FONT color=red>
   'name_of_region_2' => '省',
   'name_of_region_3' => '市',
   'name_of_region_4' => '区',
-  'search_keywords' => '',
+  'search_keywords' => '手机,诺基亚,华为',
   'related_goods_number' => '4',
   'help_open' => '1',
   'article_page_size' => '10',

@@ -803,14 +803,17 @@ function hideLoader()
 
 
 /*
-if (Object.prototype.toJSONString) {
-	var oldToJSONString = Object.toJSONString;
-	Object.prototype.toJSONString = function() {
-		if (arguments.length > 0) {
-			return false;
-		} else {
-			return oldToJSONString.apply(this, arguments);
-		}
-	}
-}
-*/
+ if (Object.prototype.toJSONString) {
+ var oldToJSONString = Object.toJSONString;
+ Object.prototype.toJSONString = function() {
+ if (arguments.length > 0) {
+ return false;
+ } else {
+ return oldToJSONString.apply(this, arguments);
+ }
+ }
+ }
+* */
+
+
+

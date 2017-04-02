@@ -34,19 +34,45 @@ var process_request = "{$lang.process_request}";
 		<div class="logo lg_h">
 			<a href="./"><img src="./images/newlogo.png" /></a>
 		</div>
+		<script type="text/javascript">
+            {literal}
+            <!--
+            function checkSearchForm()
+            {
+                if(document.getElementById('keyword').value)
+                {
+                    return true;
+                }
+                else
+                {
+                    alert("{$lang.no_keywords}");
+                    return false;
+                }
+            }
+            -->
+            {/literal}
+		</script>
 		<div class="search">
 			<div class="search_box">
-				<input type="text" id="s_keyword" name="s_keyword" />
-				<input type="button" id="search" name="search" value="搜索"/>
+				<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r">
+					<input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}"/>
+					<input type="submit" id="search" name="search" value="搜索"/>
+				</form>
 			</div>
 			<div class="hot_search">
-				热门搜索：
-				<a href="#">荣耀7</a>
-				<a href="#">麦芒4</a>
-				<a href="#">华为P8</a>
-				<a href="#">指纹识别</a>
-				<a href="#">荣耀4C</a>
-				<a href="#">4A</a>
+				{*热门搜索：*}
+				{*<a href="#">荣耀7</a>*}
+				{*<a href="#">麦芒4</a>*}
+				{*<a href="#">华为P8</a>*}
+				{*<a href="#">指纹识别</a>*}
+				{*<a href="#">荣耀4C</a>*}
+				{*<a href="#">4A</a>*}
+                {if $searchkeywords}
+                    {$lang.hot_search} ：
+                    {foreach from=$searchkeywords item=val}
+						<a href="search.php?keywords={$val|escape:url}">{$val}</a>
+                    {/foreach}
+                {/if}
 			</div>
 		</div>
 		<div class="tool_bar">

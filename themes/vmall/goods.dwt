@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="Keywords" content="{$keywords}" />
+        <meta name="Description" content="{$description}" />
+        <!-- TemplateBeginEditable name="doctitle" -->
+        <title>{$page_title}</title>
+        <!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+        <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+        <link href="./themes/vmall/MagicZoom.css" rel="stylesheet" type="text/css" />
+        <link href="./themes/vmall/ShopShow.css" rel="stylesheet" type="text/css" />
+        {* 包含脚本文件 *}
+        {insert_scripts files='common.js,jquery.min.js,vmall_common.js,MagicZoom.js'}
+        <script type="text/javascript">
+            function $id(element) {
+                return document.getElementById(element);
+            }
+            //切屏--是按钮，_v是内容平台，_h是内容库
+            function reg(str) {
+                var bt = $id(str + "_b").getElementsByTagName("h2");
+                for (var i = 0; i < bt.length; i++) {
+                    bt[i].subj = str;
+                    bt[i].pai = i;
+                    bt[i].style.cursor = "pointer";
+                    bt[i].onclick = function() {
+                        $id(this.subj + "_v").innerHTML = $id(this.subj + "_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+                        for (var j = 0; j < $id(this.subj + "_b").getElementsByTagName("h2").length; j++) {
+                            var _bt = $id(this.subj + "_b").getElementsByTagName("h2")[j];
+                            var ison = j == this.pai;
+                            _bt.className = (ison ? "" : "h2bg");
+                        }
+                    }
+                }
+                $id(str + "_h").className = "none";
+                $id(str + "_v").innerHTML = $id(str + "_h").getElementsByTagName("blockquote")[0].innerHTML;
+            }
+
+        </script>
+    </head>
+    <body>
+        <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+        <div class="lg_layout">
+            <div class="bread_nav">
+                <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+            </div>
+        </div>
+
+        <div class="lg_layout">
+            
+            <div class="left_area">
+                <!-- {if $pictures}-->
+                <div id="tsShopContainer">
+                    <div id="tsImgS"><a href="{$goods.goods_img}" title="Images" class="MagicZoom" id="MagicZoom"><img width="300" height="300" src="{$goods.goods_img}" /></a></div>
+                    <div id="tsPicContainer">
+                        <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
+                        <div id="tsImgSCon">
+                            <ul>
+                                <!-- {foreach from=$pictures item=picture name=gallery}-->
+                                <li onclick="showPic({$smarty.foreach.gallery.index})" rel="MagicZoom" class="{if $smarty.foreach.gallery.index eq $key}tsSelectImg{/if}"><img height="42" width="42" src="{$picture.img_url}" tsImgS="{$picture.img_url}" /></li>
+                                <!--{/foreach}-->
+                            </ul>
+                        </div>
+                        <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
+                    </div>
+                    <img class="MagicZoomLoading" width="16" height="16" src="images/loading.gif" alt="Loading..." />
+                </div>
+                <!-- {/if}-->
+            </div>
+            
+            <div class="right_area">
+                <form action="javascript:addToCartGoods({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+                <div class="p_title">
+                    {*商品名称*}
+                    {$goods.goods_style_name}
+                </div>
+                <div class="p_info">
+                    <div class="p_brand">
+                        <strong>{$lang.goods_brand}</strong>
+                        <span>{$goods.goods_brand}</span>
+                    </div>
+                    <div class="p_code">
+                        <strong>{$lang.goods_sn}</strong>
+                        <span>{$goods.goods_sn}</span>
+                    </div>
+                    <div class="list_time">
+                        <strong>{$lang.add_time}</strong>
+                        <span>{$goods.add_time}</span>
+                    </div>
+                    <div class="p_stock">
+                        <strong>{$lang.goods_number}</strong>
+                        <span>{$goods.goods_number} {$goods.measure_unit}</span>
+                    </div>
+                    <div class="p_weight">
+                        <strong>{$lang.goods_weight}</strong>
+                        <span>{$goods.goods_weight}</span>
+                    </div>
+                    <div class="p_price">
+                        <strong>{$lang.shop_price}</strong>
+                        <span>{$goods.shop_price_formated}</span>
+                    </div>
+                    <div class="p_qty">
+                        <strong>购买数量:</strong>
+                        <span><input name="number" type="text" id="number" value="1" size="4" /></span>
+                    </div>
+                    <div class="p_attr">
+                        <!-- {* 开始循环所有可选属性 不同颜色就加价格*} -->
+                        <!-- {foreach from=$specification item=spec key=spec_key} -->
+                        <li>
+                        <strong>{$spec.name}:</strong><br />
+                          <!-- {* 判断属性是复选还是单选 *} -->
+                              <!-- {if $spec.attr_type eq 1} -->
+                                <!-- {if $cfg.goodsattr_style eq 1} -->
+                                  <!-- {foreach from=$spec.values item=value key=key} -->
+                                  <label for="spec_value_{$value.id}">
+                                  <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
+                                  {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                                  <!-- {/foreach} -->
+                                  <input type="hidden" name="spec_list" value="{$key}" />
+                                  <!-- {else} -->
+                                  <select name="spec_{$spec_key}" onchange="changePrice()">
+                                    <!-- {foreach from=$spec.values item=value key=key} -->
+                                    <option label="{$value.label}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+                                    <!-- {/foreach} -->
+                                  </select>
+                                  <input type="hidden" name="spec_list" value="{$key}" />
+                                <!-- {/if} -->
+                              <!-- {else} -->
+                                <!-- {foreach from=$spec.values item=value key=key} -->
+                                <label for="spec_value_{$value.id}">
+                                <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+                                {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                                <!-- {/foreach} -->
+                                <input type="hidden" name="spec_list" value="{$key}" />
+                              <!-- {/if} -->
+                        </li>
+                        <!-- {/foreach} -->
+                        <!-- {* 结束循环可选属性 *} -->
+                    </div>
+                    <div class="btn">
+                        <a href="javascript:addToCartGoods({$goods.goods_id})" class="btn_shop">立即购买</a>
+                    </div>				
+                </div>
+                </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="lg_layout">
+            <div class="left_sidebar">
+                <div class="top_seller">
+                    <div class="title"><h3>热销榜单</h3></div>
+                    <div class="top_list">
+                        <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+                        <li>
+                            <p class="img"><img src="{$goods.thumb}" width="60" height="60" /></p>
+                            <p class="title">
+                                <a href="{$goods.url}">{$goods.short_name}</a>
+                            </p>
+                            <p class="price">{$goods.price}</p>
+                            {*换成123456显示*}
+                            <i class="t{$smarty.foreach.top_goods.iteration} t_bg"></i>
+                        </li>
+                        <!-- {/foreach} -->
+                    </div>
+                </div>
+                {*浏览记录 可以不要这个功能*}
+                <div class="view_history">
+                    <div class="title"><h3>最近浏览过的商品</h3></div>
+                    <div class="history_list" id='history_list'>
+                        {insert name='history'}
+                    </div>
+                    <script type="text/javascript">
+                    if (document.getElementById('history_list').innerHTML.replace(/\s/g,'').length<1)
+                    {
+                        document.getElementById('history_div').style.display='none';
+                    }
+                    else
+                    {
+                        document.getElementById('history_div').style.display='block';
+                    }
+                    function clear_history()
+                    {
+                    Ajax.call('user.php', 'act=clear_history',clear_history_Response, 'GET', 'TEXT',1,1);
+                    }
+                    function clear_history_Response(res)
+                    {
+                    document.getElementById('history_list').innerHTML = '{$lang.no_history}';
+                    }
+                    </script>
+                </div>
+            </div>
+            <div class="right_sidebar">			
+                {*商品详情*}
+                <div id="goods_desc">
+                    <div class="tag">
+                        <li><a href="javascript:void(0)">商品描述</a></li>
+                        <li><a href="javascript:void(0)">商品属性</a></li>								
+                    </div>
+                    <div id="desc">
+                        <div class="info">
+                        <blockquote>
+                            {*描述*}
+                            {$goods.goods_desc}
+                        </blockquote>
+                        </div>
+                        <div class="spec hide">
+                            {*商品参数*}
+                            <blockquote>
+                                <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#dddddd">
+                                    <!-- {foreach from=$properties item=property_group key=key} -->
+                                    <tr>
+                                        <th colspan="2" bgcolor="#FFFFFF">{$key|escape}</th>
+                                    </tr>
+                                    <!-- {foreach from=$property_group item=property} -->
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="left" width="30%" class="f1">[{$property.name|escape:html}]</td>
+                                        <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value}</td>
+                                    </tr>
+                                    <!-- {/foreach}-->
+                                    <!-- {/foreach}-->
+                                </table>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>		
+        </div>
+
+        <div class="clear"></div>
+        {*<script src="ShopShow.js"></script> 不要用这种方式引入*}
+        {insert_scripts files='ShopShow.js'}
+        <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+    </body>
+    <script>
+                $(function(){
+                    $(".p_list > .item").hover(function(){
+                        $(this).css( "border-color", "#c00" );
+                    }, function(){
+                        $(this).css( "border-color", "#aaa" );
+                    });
+                    $(".p_list .cart").hover(function(){
+                        $(this).css( { "background":"#c00", "color":"#fff" } );
+                    }, function(){
+                        $(this).css( { "background":"white", "color":"#c00" } );
+                    });
+                });
+
+                $('#goods_desc li:eq(0)').on('click',function(){
+                    //console.log(this);
+                    $('#desc div').addClass('hide');
+                    $('#desc .info').removeClass('hide');
+                })
+
+                $('#goods_desc li:eq(1)').on('click',function(){
+                    //console.log(this);
+                    $('#desc div').addClass('hide');
+                    $('#desc .spec').removeClass('hide');
+                })
+    </script>
+</html>

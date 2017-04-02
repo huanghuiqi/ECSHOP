@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="{$keywords}" />
+    <meta name="Description" content="{$description}" />
+    <!-- TemplateBeginEditable name="doctitle" -->
+    <title>{$page_title}</title>
+    <!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+    <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+    <!-- {if $cat_style} -->
+    <link href="{$cat_style}" rel="stylesheet" type="text/css" />
+    <!-- {/if} -->
+    {* 包含脚本文件 *}
+    {insert_scripts files='common.js,global.js,compare.js'}
+    <style>
+        .bgcolor{
+            background: #990000;
+        }
+    </style>
+</head>
+
+<body>
+{*头部的直接引入就行了*}
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="lg_layout">
+    <div class="bread_nav">
+        {*<a href="#">首页</a>*}
+        {*&nbsp; &gt; &nbsp;*}
+        {*<a href="#">手机</a>*}
+        {*&nbsp; &gt; &nbsp;*}
+        {*<a href="#">荣耀</a>*}
+        <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+    </div>
+</div>
+
+<div class="lg_layout">
+    <!--组合搜索 开始-->
+    <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+    <div class="attr_filter">
+        {*如果有品牌*}
+        <!--{if $brands.1}-->
+        <strong class="attr_name">
+            {$lang.brand}:
+        </strong>
+        <!--{foreach from=$brands item=brand}-->
+        <!-- {if $brand.selected} -->
+        <span class="current">{$brand.brand_name}</span>
+        <!-- {else} -->
+        <a href="{$brand.url}">{$brand.brand_name}</a>&nbsp;
+        <!-- {/if} -->
+        <!--{/foreach}-->
+        <!-- {/if} -->
+    </div>
+    <div class="attr_filter">
+        <!--{if $price_grade.1}-->
+        <strong class="attr_name">
+            {$lang.price}:
+        </strong>
+        <!--{foreach from=$price_grade item=grade}-->
+        <!-- {if $grade.selected} -->
+        <span class="current">{$grade.price_range}</span>
+        <!-- {else} -->
+        <a href="{$grade.url}">{$grade.price_range}</a>&nbsp;
+        <!-- {/if} -->
+        <!--{/foreach}-->
+        <!-- {/if} -->
+    </div>
+
+    <!--{foreach from=$filter_attr_list item=filter_attr}-->
+    <div class="attr_filter">
+        <strong class="attr_name">{$filter_attr.filter_attr_name|escape:html} :</strong>
+        <!--{foreach from=$filter_attr.attr_list item=attr}-->
+        <!-- {if $attr.selected} -->
+        <span class="current">{$attr.attr_value}</span>
+        <!-- {else} -->
+        <a href="{$attr.url}">{$attr.attr_value}</a>&nbsp;
+        <!-- {/if} -->
+        <!--{/foreach}-->
+    </div>
+    <!--{/foreach}-->
+</div>
+<!-- {/if} -->
+<!--组合搜索 结束-->
+</div>
+<!-- #BeginLibraryItem "/library/goods_list.lbi" --><!-- #EndLibraryItem -->
+<div class="lg_layout">
+    <div class="p_list">
+        <!--{foreach from=$goods_list item=goods}-->
+        <!-- {if $goods.goods_id} -->
+        <div class="item">
+            <p class="p_img"><img src="{$goods.goods_thumb}" width=218 height= 218 /></p>
+            <p class="title">
+                <a href="{$goods.url}">{$goods.goods_name}</a>
+            </p>
+            <p class="price">{$goods.shop_price}</p>
+            <div class="btn">
+                <div class="cart">加入到购物车</div>
+                <div class="comment">88人评价</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!--{/if}-->
+        <!--{/foreach}-->
+    </div>
+</div>
+<div class="clear"></div>
+<div class="lg_layout">
+    <div class="showpage">
+        <span class="total_page">{$lang.pager_1}<b>{$pager.record_count}</b> {$lang.pager_2}</span>
+        <!-- {if $pager.page_first} --><a class="first_page" href="{$pager.page_first}">&lt;&lt;{$lang.page_first} </a><!-- {/if} -->
+        <!-- {if $pager.page_prev} --><a class="prev_page" href="{$pager.page_prev}">&lt;{$lang.page_prev}</a><!-- {/if} -->
+        {*<a href="#" class="first_page" title="首页">&lt;&lt;首页</a>*}
+        {*<a href="#" class="prev_page" title="上一页">&lt;上一页</a>*}
+        {*<span class="current">1</span>*}
+        {*<a href="#" class="pages">2</a>*}
+
+        <!-- {if $pager.page_count neq 1} -->
+            <!--{foreach from=$pager.page_number key=key item=item}-->
+            <!-- {if $pager.page eq $key} -->
+        <span class="current">{$key}</span>
+    <!-- {else} -->
+        <a href="{$item}" class="pages">{$key}</a>
+        <!-- {/if} -->
+        <!--{/foreach}-->
+        <!-- {/if} -->
+
+        {*<a href="#" class="next_page" title="下一页">&gt;下一页</a>*}
+        {*<a href="#" class="last_page" title="尾页">&gt;&gt;尾页</a>*}
+        <!-- {if $pager.page_next} --><a class="next_page" href="{$pager.page_next}">&gt;{$lang.page_next}</a><!-- {/if} -->
+        <!-- {if $pager.page_last} --><a class="last_page" href="{$pager.page_last}">&gt;&gt;{$lang.page_last}</a><!-- {/if} -->
+    </div>
+</div>
+
+<script>
+    var nav = document.getElementsByClassName("nav")[0];
+    var lis = nav.getElementsByTagName('li');
+    for(var i=0 ;i<lis.length;i++){
+        this.index = i;
+        lis[index].onmouseover=function(){
+            this.setAttribute("class","bgcolor");
+            var ul = this.getElementsByTagName('ul')[0];
+            if(ul){
+                ul.style.display = "block";
+            }
+        }
+        lis[index].onmouseout=function(){
+            this.setAttribute("class","");
+            var ul = this.getElementsByTagName('ul')[0];
+            if(ul){
+                ul.style.display = "none";
+            }
+        }
+    }
+</script>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>
