@@ -16,8 +16,8 @@
 <body>
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
 <!--当前位置 start-->
-<div class="block box lg_layout">
- <div id="ur_here">
+<div class="lg_layout">
+ <div id="ur_here" style="padding-top: 5px">
   <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
   </div>
 </div>
@@ -26,7 +26,7 @@
 
 <!--#登录界面 start-->
 <!-- {if $action eq 'login'} -->
-<div class="lg_layout">
+<div class="main">
   <div class="login_form">
     <form name="formLogin" action="user.php" method="post" onSubmit="return userLogin()">
       <table class="login w_100">

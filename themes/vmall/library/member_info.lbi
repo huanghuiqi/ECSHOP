@@ -3,7 +3,7 @@
 {if $user_info}
 <font style="position:relative;">
 {$lang.hello}，<font class="f4_b">{$user_info.username}</font>, {$lang.welcome_return}！
-<a href="user.php">{$lang.user_center}</a>|
+<a href="user.php" style="padding-right:3px">{$lang.user_center}</a>|
  <a href="user.php?act=logout">{$lang.user_logout}</a>
 </font>
 {else}

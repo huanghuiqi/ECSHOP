@@ -94,10 +94,10 @@
                         <strong>{$lang.goods_number}</strong>
                         <span>{$goods.goods_number} {$goods.measure_unit}</span>
                     </div>
-                    <div class="p_weight">
+                    <!--<div class="p_weight">
                         <strong>{$lang.goods_weight}</strong>
                         <span>{$goods.goods_weight}</span>
-                    </div>
+                    </div>-->
                     <div class="p_price">
                         <strong>{$lang.shop_price}</strong>
                         <span>{$goods.shop_price_formated}</span>

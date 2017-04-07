@@ -1,2 +1,2 @@
 <?php
-    echo md5('huang');
+    echo md5('admin123456');

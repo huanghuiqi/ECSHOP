@@ -14,7 +14,7 @@ $db_pass   = "1234";
 // table prefix 
 $prefix    = "ecs_";
 
-$timezone    = "PRC";
+$timezone    = "Europe/Paris";
 
 $cookie_path    = "/";
 
@@ -30,7 +30,7 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
-define('API_TIME', '2017-04-06 20:31:36');
+define('API_TIME', '2017-04-07 07:57:56');
 
 register_shutdown_function($env = 'env_logs',true);
 set_error_handler($env,E_ALL);
