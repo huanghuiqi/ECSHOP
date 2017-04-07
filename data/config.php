@@ -30,7 +30,7 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
-define('API_TIME', '2017-04-01 13:52:44');
+define('API_TIME', '2017-04-06 20:31:36');
 
 register_shutdown_function($env = 'env_logs',true);
 set_error_handler($env,E_ALL);

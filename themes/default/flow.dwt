@@ -693,6 +693,8 @@
           <p style="text-align:center; margin-bottom:20px;">{$order_submit_back}</p>
         </div>
         <!-- {/if} -->
+
+
         <!-- {if $step eq "login"} -->
         {insert_scripts files='utils.js,user.js'}
         <script type="text/javascript">

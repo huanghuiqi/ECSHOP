@@ -80,9 +80,12 @@
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td><label>
+          <td>
+            <label>
               <input name="agreement" type="checkbox" value="1" checked="checked" />
-                  {$lang.agreement}</label></td>
+                  {$lang.agreement}
+            </label>
+          </td>
         </tr>
         <tr>
           <td colspan="2" align="center">
@@ -128,7 +131,7 @@
             <td><input type="hidden" name="act" value="send_pwd_email" />
               <input type="submit" name="submit" value="{$lang.submit}" class="bnt_blue" style="border:none;" />
               <input name="button" type="button" onclick="history.back()" value="{$lang.back_page_up}" style="border:none;" class="bnt_blue_1" />
-	    </td>
+	        </td>
           </tr>
         </table>
         <br />

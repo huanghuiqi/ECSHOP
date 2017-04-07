@@ -29,7 +29,7 @@ var process_request = "{$lang.process_request}";
 			<div class="clear"></div>
 		</div>
 	</div>
-	<div class="lg_layout img_h"><img src="./images/top_ad.jpg" width="980px"/></div>
+	{*<div class="lg_layout img_h"><img src="./images/top_ad.jpg" width="980px"/></div>*}
 	<div class="lg_layout lg_h">
 		<div class="logo lg_h">
 			<a href="./"><img src="./images/newlogo.png" /></a>
@@ -55,7 +55,7 @@ var process_request = "{$lang.process_request}";
 		<div class="search">
 			<div class="search_box">
 				<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r">
-					<input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}"/>
+					<input  class="search-box" name="keywords" type="text" id="keyword" value="{$search_keywords|escape}"/>
 					<input type="submit" id="search" name="search" value="搜索"/>
 				</form>
 			</div>
@@ -75,10 +75,11 @@ var process_request = "{$lang.process_request}";
                 {/if}
 			</div>
 		</div>
-		<div class="tool_bar">
-			<div class="my_mall">我的商城</div>
-			<div class="my_cart">我的购物车</div>
-		</div>
+		{*<div class="tool_bar">*}
+			{*<div class="my_mall">我的商城</div>*}
+			{**}
+		{*</div>*}
+		<div class="my_cart"><a href="flow.php?step=cart">我的购物车</a></div>
 		<div class="qr_code">
 			<img src="./images/qrcode_vmall_app01.png" height="60px"/>
 		</div>
